@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".app.MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:text="光影议会"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:textColor="@color/window_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <com.zqw.lightfilm.re.NoScrollViewPager
+        android:id="@+id/vp_context"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:alpha="0.6"
+        android:background="@android:color/darker_gray"/>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        app:menu="@menu/bottom_navigation_view_menu"
+        android:layout_width="match_parent"
+        app:itemIconTint="@color/window_background"
+        app:itemTextColor="@color/window_background"
+        app:itemBackground="@color/colorPrimary"
+        android:layout_height="58dp"/>
+
+
+</LinearLayout>

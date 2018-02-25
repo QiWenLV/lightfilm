@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_root"
+    android:layout_width="155dp"
+    android:layout_height="130dp"
+    android:orientation="vertical"
+    android:background="#e8e8e8">
+
+    <LinearLayout
+        android:id="@+id/ll_all_stills"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="155dp"
+        android:layout_height="130dp">
+
+        <TextView
+            android:text="全部"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:background="@color/text_gray02"
+            android:layout_margin="6dp"
+            android:layout_gravity="center"
+            android:layout_width="25dp"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:id="@+id/tv_all_num"
+            android:layout_gravity="center"
+            android:text="8人"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</RelativeLayout>

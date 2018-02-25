@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".app.MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="52dp">
+        <TextView
+            android:id="@+id/tv_toolbar_title"
+            android:textSize="18sp"
+            android:textColor="@color/window_background"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <com.zqw.lightfilm.re.ObservableScrollView
+        android:id="@+id/sv_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rl_heard"
+                android:layout_width="match_parent"
+                android:layout_height="250dp">
+
+
+                <ImageView
+                    android:id="@+id/iv_heard_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#92696969"/>
+
+
+                <ImageView
+                    android:id="@+id/iv_movie_img"
+                    android:layout_width="122dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="58dp"
+                    android:src="@drawable/hot"
+                    android:layout_marginLeft="10dp"
+                    android:layout_alignParentLeft="true"/>
+
+
+
+                <LinearLayout
+                    android:id="@+id/ll_movie_info"
+                    android:layout_toRightOf="@id/iv_movie_img"
+                    android:orientation="vertical"
+                    android:paddingTop="55dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:text="南极之恋"
+                        android:textSize="20sp"
+                        android:textColor="@color/window_background"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_en_tilte"
+                        android:text="英文名:"
+                        android:textSize="14sp"
+                        android:textColor="@color/window_background"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_release"
+                        android:text="上映时间:"
+                        android:textSize="14sp"
+                        android:textColor="@color/window_background"
+                        android:layout_marginTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_type"
+                        android:text="类型:"
+                        android:textSize="14sp"
+                        android:textColor="@color/window_background"
+                        android:layout_marginTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_long"
+                        android:text="片长:"
+                        android:textSize="14sp"
+                        android:textColor="@color/window_background"
+                        android:layout_marginTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@id/iv_movie_img"
+                    android:layout_below="@id/ll_movie_info"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_shiguang"
+                        android:text="时光网:"
+                        android:textSize="14sp"
+                        android:textColor="@color/window_background"
+                        android:layout_marginTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+            <include
+                layout="@layout/detail_two"/>
+
+        </LinearLayout>
+
+    </com.zqw.lightfilm.re.ObservableScrollView>
+
+</FrameLayout>

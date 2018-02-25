@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_root"
+    android:layout_width="86dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="2dp">
+
+
+
+    <ImageView
+        android:id="@+id/iv_actors_image"
+        android:layout_width="86dp"
+        android:layout_height="122dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:text="南极之恋"
+        android:textColor="@color/text_gray01"
+        android:singleLine="true"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:layout_width="86dp"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/tv_role_name"
+        android:text="导演"
+        android:textColor="@color/text_gray02"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:layout_width="86dp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

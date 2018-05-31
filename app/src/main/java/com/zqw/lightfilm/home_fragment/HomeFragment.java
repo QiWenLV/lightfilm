@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +28,7 @@ import com.zqw.lightfilm.home.bean.HotShowBean;
 import com.zqw.lightfilm.re.ListViewForScrollView;
 import com.zqw.lightfilm.utils.CacheUtils;
 import com.zqw.lightfilm.utils.Constants;
+import com.zqw.lightfilm.utils.Tools;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -65,6 +65,8 @@ public class HomeFragment extends Fragment {
     private ComingMovieAdapter comingMovieAdapter;
     private Context context;
 
+    private boolean isShowComingListView = true;
+
 
     public String datajson = null; //网络数据
 
@@ -82,26 +84,31 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
 
-        if(!TextUtils.isEmpty(CacheUtils.getString(context, "hot")) && !TextUtils.isEmpty(CacheUtils.getString(context, "coming"))){
+        /**
+         * 当内存中有hot数据和coming数据, 并且刷新时间小于一小时，就直接访问本地数据
+         */
+        if(!TextUtils.isEmpty(CacheUtils.getString(context, "hot")) && !TextUtils.isEmpty(CacheUtils.getString(context, "coming")) && Tools.isRefreshTime(context)){
             setHotMovie(CacheUtils.getString(context, "hot"));
             setComingMovie(CacheUtils.getString(context, "coming"));
         } else {
-            getDataFromNet();   //联网请求
+            if(!TextUtils.isEmpty(CacheUtils.getString(context, "local_id"))){
+                getDataFromNet(Integer.valueOf(CacheUtils.getString(context, "local_id")));   //联网请求
+            } else {
+                getDataFromNet(561);
+            }
+
         }
 
 
-        // 写入数据
+
 
         return view;
     }
 
 
     public void setHotMovie(String hotString) {
-        Log.i("TAG", "zh:::" + CacheUtils.getString(context, "hot"));
+
         HotShowBean hotShowBean = JSON.parseObject(hotString, HotShowBean.class);
-
-        Log.i("TAG", "345:::" +  hotShowBean.getDate());
-
 
         //设置适配器
         hotMovieAdapter = new HotMovieAdapter(context, hotShowBean.getMs());
@@ -166,8 +173,14 @@ public class HomeFragment extends Fragment {
                  */
                 String hotString = bundle.getString("hot", "");
                 String comingString = bundle.getString("coming", "");
+                String localId = bundle.getString("local", "");
+                String refreshTime = String.valueOf(System.currentTimeMillis());    //得到当前的时间（毫秒数）
                 CacheUtils.saveString(context, "hot", hotString);
                 CacheUtils.saveString(context, "coming", comingString);
+                CacheUtils.saveString(context, "local_id", localId);         //保存位置信息
+                CacheUtils.saveString(context, "refresh_time", refreshTime);
+
+
 
 
                 //适配
@@ -179,13 +192,13 @@ public class HomeFragment extends Fragment {
     };
 
 
-    public void getDataFromNet() {
+    public void getDataFromNet(final int localId) {
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Response response1 = OkGo.get(Constants.HOTSHOW_URL)
+                    Response response1 = OkGo.get(Constants.HOTSHOW_URL + localId)
                             .tag(this)
                             .retryCount(2)
                             .cacheTime(5000)
@@ -194,7 +207,7 @@ public class HomeFragment extends Fragment {
 
 
 
-                    Response response2 = OkGo.get(Constants.COMINGSHOW_URL)
+                    Response response2 = OkGo.get(Constants.COMINGSHOW_URL + localId)
                             .tag(this)
                             .retryCount(2)
                             .cacheTime(5000)
@@ -207,7 +220,9 @@ public class HomeFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putString("hot", data1);
                     bundle.putString("coming", data2);
+                    bundle.putString("local", localId+"");
                     message.setData(bundle);
+
 
                     handler.sendMessage(message);
 
@@ -224,5 +239,10 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+
+    public void refushLocal(int localId){
+        getDataFromNet(localId);
     }
 }

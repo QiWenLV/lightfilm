@@ -1,5 +1,6 @@
 package com.zqw.lightfilm.detail_movie;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -21,16 +22,19 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.zqw.lightfilm.R;
+import com.zqw.lightfilm.detail_actors.DetailActorsActivity;
 import com.zqw.lightfilm.detail_movie.Bean.ImageAllBean;
 import com.zqw.lightfilm.detail_movie.Bean.MovieDetailBean;
 import com.zqw.lightfilm.re.ObservableScrollView;
 import com.zqw.lightfilm.utils.Constants;
+import com.zqw.lightfilm.utils.Tools;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import jaydenxiao.com.expandabletextview.ExpandableTextView;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
@@ -61,7 +65,7 @@ public class DetailMovieActivity extends AppCompatActivity {
     @Bind(R.id.iv_heard_background)
     ImageView ivHeardBackground;
     @Bind(R.id.tv_story)
-    TextView tvStory;
+    ExpandableTextView E_tvStory;
     @Bind(R.id.rv_actors)
     RecyclerView rvActors;
     @Bind(R.id.sv_view)
@@ -72,8 +76,8 @@ public class DetailMovieActivity extends AppCompatActivity {
     RecyclerView rvStills;
     @Bind(R.id.ll_stills)
     LinearLayout llStills;
-    @Bind(R.id.rv_prize)
-    RecyclerView rvPrize;
+//    @Bind(R.id.rv_prize)
+//    RecyclerView rvPrize;
     @Bind(R.id.ll_prize)
     LinearLayout llPrize;
 
@@ -192,19 +196,18 @@ public class DetailMovieActivity extends AppCompatActivity {
 
         tvTitle.setText(data.getBasic().getName());
         tvEnTilte.setText(data.getBasic().getNameEn());
-        tvRelease.setText(data.getBasic().getReleaseDate() + "(" + data.getBasic().getReleaseArea() + ")");
+        tvRelease.setText(Tools.timeFormat(data.getBasic().getReleaseDate()) + "(" + data.getBasic().getReleaseArea() + ")");   //上映时间
 
-        List<String> type = data.getBasic().getType();
-        String s_type = "";
-        for (int i = 0; i < type.size(); i++) {
-            s_type += type.get(i);
-            s_type += "/";
-        }
-        tvType.setText(s_type);
+        tvType.setText(Tools.typeChange(data.getBasic().getType()));    //影片类型
 
         tvLong.setText(data.getBasic().getMins());
 
-        tvShiguang.setText("评分: " + data.getBasic().getOverallRating());
+        if(data.getBasic().getOverallRating() < 0){
+            tvShiguang.setText("评分: 无");
+        }else {
+            tvShiguang.setText("评分: " + data.getBasic().getOverallRating());
+        }
+
 
         Glide.with(this)
                 .load(data.getBasic().getImg())
@@ -217,7 +220,7 @@ public class DetailMovieActivity extends AppCompatActivity {
                 // .bitmapTransform(new CropCircleTransformation(this))
                 .into(ivMovieImg);
 
-        tvStory.setText("     " + data.getBasic().getStory());
+        E_tvStory.setText("     " + data.getBasic().getStory());
 
 
         /**
@@ -231,13 +234,22 @@ public class DetailMovieActivity extends AppCompatActivity {
         /**
          * 初始化剧照列表
          */
-        //  data.getBasic().get
         initStills(moiveId);
+
+
+        /**
+         * 初始化奖项列表
+         */
+        MovieDetailBean.DataBean.BasicBean.AwardBean award = data.getBasic().getAward();
 
 
 
     }
 
+
+    /**
+     * 初始化剧照列表
+     */
     private void initStills(String moiveId) {
 
         if (moiveId != null) {
@@ -316,7 +328,7 @@ public class DetailMovieActivity extends AppCompatActivity {
         }
 
 
-        actorsAdapter = new ActorsAdapter(this, newActor, director);
+        actorsAdapter = new ActorsAdapter(this, newActor, director, actors.size());
 
         //设置布局管理器
         rvActors.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -333,11 +345,13 @@ public class DetailMovieActivity extends AppCompatActivity {
 
                     case 0:
                         //开启导演详情页面
-                        Toast.makeText(DetailMovieActivity.this, actors + "", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(DetailMovieActivity.this, actors + "", Toast.LENGTH_SHORT).show();
+                        inputActorsInfo(actors);
                         break;
                     case 1:
                         //开启演员详情页面
-                        Toast.makeText(DetailMovieActivity.this, actors + "", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(DetailMovieActivity.this, actors + "", Toast.LENGTH_SHORT).show();
+                        inputActorsInfo(actors);
                         break;
                     case 2:
                         //开启查看全部
@@ -349,6 +363,18 @@ public class DetailMovieActivity extends AppCompatActivity {
         });
     }
 
+
+
+
+
+
+    private void inputActorsInfo(int actorsId){
+        Bundle b = new Bundle();
+        b.putString("actors_id", actorsId+"");
+        Intent i = new Intent(this, DetailActorsActivity.class);
+        i.putExtra("actors_id", b);
+        startActivity(i);
+    }
 
     @Override
     public void onBackPressed() {

@@ -3,7 +3,7 @@ package com.zqw.lightfilm.detail_movie.Bean;
 import java.util.List;
 
 /**
- * Created by 启文 on 2018/2/7.
+ * Created by 启文 on 2018/2/26.
  */
 public class MovieDetailBean {
 

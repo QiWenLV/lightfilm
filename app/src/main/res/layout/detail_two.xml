@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="12dp"
     android:layout_width="match_parent"
@@ -13,14 +14,20 @@
         android:layout_height="wrap_content" />
 
 
-    <TextView
+    <jaydenxiao.com.expandabletextview.ExpandableTextView
         android:id="@+id/tv_story"
-        android:text="简介"
         android:layout_marginTop="6dp"
-        android:textColor="@color/text_gray01"
-        android:textSize="15sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:collapseDrawable="@drawable/icon_green_arrow_down"
+        app:collapseExpandGrarity="right"
+        app:collapseExpandTextColor="@color/main_color"
+        app:contentTextColor="@color/text_gray01"
+        app:contentTextSize="15sp"
+        app:expandDrawable="@drawable/icon_green_arrow_up"
+        app:maxCollapsedLines="4"
+        app:textCollapse="@string/collapse"
+        app:textExpand="@string/expand" />
 
     <TextView
         android:text="影人"
@@ -82,13 +89,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_prize"
+        <GridView
+            android:id="@+id/gv_prize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
-        </android.support.v7.widget.RecyclerView>
+        </GridView>
 
     </LinearLayout>
 

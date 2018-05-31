@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zqw.lightfilm.detail_actors.DetailActorsActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="52dp">
+        <TextView
+            android:id="@+id/tv_toolbar_title"
+            android:textSize="18sp"
+            android:textColor="@color/window_background"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <com.zqw.lightfilm.re.ObservableScrollView
+        android:id="@+id/sv_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rl_heard"
+                android:layout_width="match_parent"
+                android:layout_height="270dp">
+
+
+                <ImageView
+                    android:id="@+id/iv_heard_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#9e6c6c6c"/>
+
+
+                <ImageView
+                    android:id="@+id/iv_movie_img"
+                    android:layout_width="122dp"
+                    android:layout_height="150dp"
+                    android:layout_centerInParent="true"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_movie_info"
+                    android:layout_below="@id/iv_movie_img"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:text="赵丽颖"
+                        android:textSize="20sp"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/window_background"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_en_name"
+                        android:text="ZhanLiYing"
+                        android:textSize="14sp"
+                        android:textColor="@color/window_background"
+                        android:layout_marginTop="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <include
+                layout="@layout/actors_two"/>
+
+        </LinearLayout>
+
+    </com.zqw.lightfilm.re.ObservableScrollView>
+
+
+</FrameLayout>

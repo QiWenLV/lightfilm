@@ -24,6 +24,7 @@ public class ActorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private List<MovieDetailBean.DataBean.BasicBean.ActorsBean> actors;
     private MovieDetailBean.DataBean.BasicBean.DirectorBean director;
+    private int actorsNum;
     private Context context;
 
     private static final int MAXNUM = 7;
@@ -32,10 +33,11 @@ public class ActorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
 
-    public ActorsAdapter(Context context, List<MovieDetailBean.DataBean.BasicBean.ActorsBean> actors, MovieDetailBean.DataBean.BasicBean.DirectorBean director) {
+    public ActorsAdapter(Context context, List<MovieDetailBean.DataBean.BasicBean.ActorsBean> actors, MovieDetailBean.DataBean.BasicBean.DirectorBean director, int size) {
         this.context = context;
         this.actors = actors;
         this.director = director;
+        this.actorsNum = size;
 
     }
 
@@ -81,7 +83,7 @@ public class ActorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }else if(getItemViewType(position) == ALL){
             AllViewHolder allViewHolder = (AllViewHolder) holder;
 
-            allViewHolder.tvAllNum.setText("9人");
+            allViewHolder.tvAllNum.setText(actorsNum+1+"");
 
             allViewHolder.llAllActors.setOnClickListener(new View.OnClickListener() {
                 @Override

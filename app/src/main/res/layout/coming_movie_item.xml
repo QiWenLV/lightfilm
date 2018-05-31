@@ -14,12 +14,14 @@
         android:text="即将上映"
         android:textColor="#000"/>
 
+
     <com.zqw.lightfilm.re.ListViewForScrollView
         android:id="@+id/lv_coming"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </com.zqw.lightfilm.re.ListViewForScrollView>
+
 
 
 </LinearLayout>

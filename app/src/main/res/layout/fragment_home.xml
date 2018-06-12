@@ -14,10 +14,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/rv_home"
+
+                        <include
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"/>
+                            android:layout_height="125dp"
+                            layout="@layout/main_modular"/>
 
                         <include
                             android:layout_width="match_parent"

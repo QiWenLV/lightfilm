@@ -23,8 +23,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".detail_movie.DetailMovieActivity" />
-        <activity android:name=".detail_actors.DetailActorsActivity"/>
-        <activity android:name=".local_choose.LocalChooseActivity"/>
+        <activity android:name=".detail_actors.DetailActorsActivity" />
+        <activity android:name=".local_choose.LocalChooseActivity" />
+        <activity android:name=".eye.EyeActivity" />
+        <activity android:name=".eye.EyeVideoPlayActivity"></activity>
     </application>
 
 </manifest>

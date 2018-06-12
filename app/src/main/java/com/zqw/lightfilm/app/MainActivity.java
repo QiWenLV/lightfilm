@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.zqw.lightfilm.R;
 import com.zqw.lightfilm.home_fragment.HomeFragment;
 import com.zqw.lightfilm.local_choose.LocalChooseActivity;
+import com.zqw.lightfilm.utils.CacheUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -103,6 +105,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.replace(R.id.fl_context, fragment);
         transaction.commit();
 
+        if(!TextUtils.isEmpty(CacheUtils.getString(this, "LOCAL_N"))){
+
+            tvLocal.setText(CacheUtils.getString(this, "LOCAL_N"));
+        }
+
+
 
     }
 
@@ -182,13 +190,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if(requestCode == 1){
-            Bundle bundle = data.getExtras();
-            int localId = bundle.getInt("LOCAL_ID");
+            if(data != null){
+                Bundle bundle = data.getExtras();
+                int localId = bundle.getInt("LOCAL_ID");
 
 
-            tvLocal.setText(bundle.getString("LOCAL_N"));
+                tvLocal.setText(bundle.getString("LOCAL_N"));
 
-            fragment.refushLocal(localId);
+                CacheUtils.saveString(this, "LOCAL_N", bundle.getString("LOCAL_N"));    //保存地名
+
+                fragment.refushLocal(localId);
+            } else {
+
+                fragment.refushLocal(-1);
+
+            }
+
 
         }
     }

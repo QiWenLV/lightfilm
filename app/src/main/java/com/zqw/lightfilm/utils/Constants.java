@@ -48,6 +48,11 @@ public class Constants {
     public static String LOCAL_URL = "https://api-m.mtime.cn/Showtime/HotCitiesByCinema.api";
 
 
+    /**
+     * 开眼
+     */
+    public static String EYE_HOME= "http://baobab.kaiyanapp.com/api/v4/discovery";
+
 
 
 

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="175dp">
+
+    <ImageView
+        android:id="@+id/iv_video_bg"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#af3b3b3b"/>
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_video_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="再会，美国队长"
+            android:textSize="19sp"
+            android:layout_gravity="center"
+            android:textColor="@color/window_background"/>
+
+        <TextView
+            android:id="@+id/tv_video_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="#动画/06'32"
+            android:textSize="13sp"
+            android:layout_gravity="center"
+            android:textColor="@color/window_background"/>
+
+
+    </LinearLayout>
+
+
+
+</FrameLayout>
